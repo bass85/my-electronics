@@ -18,316 +18,168 @@
       --text:      #c8e6c9;
       --text-dim:  #558b5e;
       --border:    #1b3b1e;
-      --pad:       #b8860b;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ── PCB background ── */
     body {
       background-color: var(--bg);
       background-image:
-        /* horizontal traces */
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 39px,
-          rgba(0,180,80,0.04) 39px,
-          rgba(0,180,80,0.04) 40px
-        ),
-        /* vertical traces */
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 39px,
-          rgba(0,180,80,0.04) 39px,
-          rgba(0,180,80,0.04) 40px
-        );
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,180,80,0.04) 39px, rgba(0,180,80,0.04) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,180,80,0.04) 39px, rgba(0,180,80,0.04) 40px);
       color: var(--text);
       font-family: 'Exo 2', sans-serif;
       font-weight: 300;
       min-height: 100vh;
     }
-
-    /* ── scanline overlay ── */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 2px,
-        rgba(0,0,0,0.08) 2px,
-        rgba(0,0,0,0.08) 4px
-      );
-      pointer-events: none;
-      z-index: 100;
+      content: ''; position: fixed; inset: 0;
+      background: repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+      pointer-events: none; z-index: 100;
     }
-
     a { color: var(--green); text-decoration: none; transition: color .2s; }
     a:hover { color: var(--amber); }
 
-    /* ── HEADER ── */
+    /* HEADER */
     header {
       border-bottom: 1px solid var(--border);
       padding: 2.5rem 2rem 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
+      display: flex; align-items: center; gap: 1.5rem;
       background: linear-gradient(180deg, #0a1f0b 0%, transparent 100%);
       position: relative;
-      overflow: hidden;
     }
-
     header::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 1px;
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--green-mid), transparent);
     }
-
-    .logo-box {
-      width: 72px; height: 72px;
-      flex-shrink: 0;
-    }
-
+    .logo-box { width: 72px; height: 72px; flex-shrink: 0; }
     .logo-box img {
-      width: 100%; height: 100%;
-      object-fit: contain;
+      width: 100%; height: 100%; object-fit: contain;
       mix-blend-mode: screen;
       filter: sepia(1) saturate(4) hue-rotate(82deg) brightness(.95);
-      display: block;
     }
-
     .header-text h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--green);
-      letter-spacing: .05em;
-      text-shadow: 0 0 20px rgba(0,230,118,.3);
+      font-size: 1.6rem; font-weight: 700; color: var(--green);
+      letter-spacing: .05em; text-shadow: 0 0 20px rgba(0,230,118,.3);
     }
     .header-text p {
-      font-size: .85rem;
-      color: var(--text-dim);
-      font-family: 'Share Tech Mono', monospace;
-      margin-top: .25rem;
+      font-size: .85rem; color: var(--text-dim);
+      font-family: 'Share Tech Mono', monospace; margin-top: .25rem;
     }
-
-    /* blinking cursor */
-    .cursor::after {
-      content: '▮';
-      animation: blink 1s step-end infinite;
-      color: var(--green);
-      font-size: .7em;
-    }
+    .cursor::after { content: '▮'; animation: blink 1s step-end infinite; color: var(--green); font-size: .7em; }
     @keyframes blink { 50% { opacity: 0; } }
 
-    /* ── NAV CATEGORIES ── */
-    nav {
-      padding: 1.2rem 2rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      border-bottom: 1px solid var(--border);
-    }
-
+    /* NAV */
+    nav { padding: 1.2rem 2rem; display: flex; gap: 1rem; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
     nav a {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: .8rem;
-      color: var(--text-dim);
-      border: 1px solid var(--green-dim);
-      padding: .3rem .8rem;
-      border-radius: 2px;
-      transition: all .2s;
+      font-family: 'Share Tech Mono', monospace; font-size: .8rem;
+      color: var(--text-dim); border: 1px solid var(--green-dim);
+      padding: .3rem .8rem; border-radius: 2px; transition: all .2s;
     }
-    nav a:hover, nav a.active {
-      color: var(--green);
-      border-color: var(--green-mid);
-      background: rgba(0,230,118,.05);
-    }
+    nav a:hover { color: var(--green); border-color: var(--green-mid); background: rgba(0,230,118,.05); }
 
-    /* ── MAIN GRID ── */
+    /* MAIN */
     main { padding: 2rem; max-width: 1200px; margin: 0 auto; }
-
     .section-label {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: .75rem;
-      color: var(--text-dim);
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: .75rem;
+      font-family: 'Share Tech Mono', monospace; font-size: .75rem;
+      color: var(--text-dim); letter-spacing: .15em; text-transform: uppercase;
+      margin-bottom: 1.2rem; display: flex; align-items: center; gap: .75rem;
     }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    /* ── PROJECT CARD ── */
+    /* CARD */
     .card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      transition: border-color .25s, transform .25s;
-      position: relative;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden;
+      transition: border-color .25s, transform .25s; position: relative;
     }
-    .card:hover {
-      border-color: var(--green-mid);
-      transform: translateY(-3px);
-    }
-    /* top-right corner accent */
+    .card:hover { border-color: var(--green-mid); transform: translateY(-3px); }
     .card::before {
-      content: '';
-      position: absolute;
-      top: 0; right: 0;
+      content: ''; position: absolute; top: 0; right: 0;
       width: 20px; height: 20px;
-      background: linear-gradient(225deg, var(--green-dim) 50%, transparent 50%);
+      background: linear-gradient(225deg, var(--green-dim) 50%, transparent 50%); z-index: 1;
     }
 
-    .card-img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
+    /* GALLERY THUMB */
+    .card-gallery {
+      position: relative; cursor: pointer;
+      aspect-ratio: 4/3; overflow: hidden; background: var(--pcb);
+    }
+    .card-gallery img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
       filter: saturate(.8) brightness(.9);
-      transition: filter .25s;
-      background: var(--pcb);
+      transition: filter .25s, transform .3s;
     }
-    .card:hover .card-img { filter: saturate(1) brightness(1.05); }
+    .card-gallery:hover img { filter: saturate(1) brightness(1.05); transform: scale(1.03); }
 
-    /* placeholder when no photo */
+    .gallery-badge {
+      position: absolute; bottom: .5rem; right: .5rem;
+      background: rgba(0,0,0,.65); border: 1px solid var(--green-dim);
+      color: var(--text-dim); font-family: 'Share Tech Mono', monospace; font-size: .68rem;
+      padding: .15rem .45rem; border-radius: 2px; pointer-events: none;
+    }
+
+    /* PLACEHOLDER */
     .card-img-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: var(--pcb);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      color: var(--green-mid);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: .75rem;
+      width: 100%; aspect-ratio: 4/3; background: var(--pcb);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: .5rem; color: var(--green-mid); font-family: 'Share Tech Mono', monospace; font-size: .75rem;
     }
     .card-img-placeholder svg { opacity: .4; }
 
     .card-body { padding: 1rem 1.1rem 1.1rem; }
-
-    .card-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--green);
-      margin-bottom: .3rem;
-    }
-
-    .card-meta {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: .72rem;
-      color: var(--text-dim);
-      margin-bottom: .6rem;
-      line-height: 1.6;
-    }
-
-    .card-desc {
-      font-size: .85rem;
-      color: var(--text);
-      line-height: 1.6;
-      margin-bottom: .8rem;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-      margin-bottom: .8rem;
-    }
-    .tag {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: .68rem;
-      border: 1px solid var(--green-dim);
-      color: var(--text-dim);
-      padding: .15rem .5rem;
-      border-radius: 2px;
-    }
-
+    .card-title { font-size: 1rem; font-weight: 600; color: var(--green); margin-bottom: .3rem; }
+    .card-meta { font-family: 'Share Tech Mono', monospace; font-size: .72rem; color: var(--text-dim); margin-bottom: .6rem; line-height: 1.6; }
+    .card-desc { font-size: .85rem; color: var(--text); line-height: 1.6; margin-bottom: .8rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .8rem; }
+    .tag { font-family: 'Share Tech Mono', monospace; font-size: .68rem; border: 1px solid var(--green-dim); color: var(--text-dim); padding: .15rem .5rem; border-radius: 2px; }
     .card-links { display: flex; gap: .8rem; flex-wrap: wrap; }
-    .card-links a {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: .75rem;
-      color: var(--text-dim);
-      display: flex;
-      align-items: center;
-      gap: .3rem;
-      transition: color .2s;
-    }
+    .card-links a { font-family: 'Share Tech Mono', monospace; font-size: .75rem; color: var(--text-dim); display: flex; align-items: center; gap: .3rem; }
     .card-links a:hover { color: var(--amber); }
-
-    /* WIP badge */
     .badge-wip {
-      display: inline-block;
-      background: rgba(255,179,0,.1);
-      border: 1px solid rgba(255,179,0,.3);
-      color: var(--amber);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: .65rem;
-      padding: .15rem .5rem;
-      border-radius: 2px;
-      margin-left: .5rem;
-      vertical-align: middle;
+      display: inline-block; background: rgba(255,179,0,.1); border: 1px solid rgba(255,179,0,.3);
+      color: var(--amber); font-family: 'Share Tech Mono', monospace; font-size: .65rem;
+      padding: .15rem .5rem; border-radius: 2px; margin-left: .5rem; vertical-align: middle;
     }
 
-    /* ── CONTACTS ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      margin-top: 1rem;
-      position: relative;
+    /* LIGHTBOX */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.93);
+      align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
     }
+    #lightbox.open { display: flex; }
+    #lightbox-img {
+      max-width: min(90vw, 1100px); max-height: 80vh; object-fit: contain;
+      border: 1px solid var(--green-dim); border-radius: 2px;
+      box-shadow: 0 0 60px rgba(0,230,118,.1);
+    }
+    .lb-controls { display: flex; align-items: center; gap: 1.5rem; }
+    .lb-btn {
+      background: transparent; border: 1px solid var(--green-dim); color: var(--green);
+      font-family: 'Share Tech Mono', monospace; font-size: 1.2rem;
+      padding: .4rem .9rem; cursor: pointer; border-radius: 2px; transition: all .2s; line-height: 1;
+    }
+    .lb-btn:hover { background: var(--green-dim); border-color: var(--green-mid); }
+    .lb-btn:disabled { opacity: .2; cursor: default; }
+    #lb-counter { font-family: 'Share Tech Mono', monospace; font-size: .8rem; color: var(--text-dim); min-width: 4rem; text-align: center; }
+    #lb-close {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      background: transparent; border: none; color: var(--text-dim);
+      font-size: 1.5rem; cursor: pointer; font-family: 'Share Tech Mono', monospace; transition: color .2s;
+    }
+    #lb-close:hover { color: var(--amber); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 2rem; margin-top: 1rem; position: relative; }
     footer::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--green-mid), transparent);
     }
+    .contacts-title { font-family: 'Share Tech Mono', monospace; font-size: .75rem; color: var(--text-dim); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 1rem; }
+    .contact-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .contact-links a { font-family: 'Share Tech Mono', monospace; font-size: .85rem; display: flex; align-items: center; gap: .4rem; }
 
-    .contacts-title {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: .75rem;
-      color: var(--text-dim);
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .contact-links {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .contact-links a {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: .85rem;
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-    }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       header { flex-direction: column; align-items: flex-start; }
       .grid { grid-template-columns: 1fr; }
@@ -336,10 +188,18 @@
 </head>
 <body>
 
-<header>
-  <div class="logo-box">
-    <img src="images/logo_white.png" alt="VD logo">
+<div id="lightbox">
+  <button id="lb-close" onclick="lbClose()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lb-controls">
+    <button class="lb-btn" id="lb-prev" onclick="lbStep(-1)">←</button>
+    <span id="lb-counter">1 / 1</span>
+    <button class="lb-btn" id="lb-next" onclick="lbStep(1)">→</button>
   </div>
+</div>
+
+<header>
+  <div class="logo-box"><img src="images/logo_white.png" alt="VD logo"></div>
   <div class="header-text">
     <h1>Дмитро Волковський</h1>
     <p>// embedded systems · pcb design · DIY electronics<span class="cursor"></span></p>
@@ -347,7 +207,7 @@
 </header>
 
 <nav>
-  <a href="#controllers" class="active">Контролери</a>
+  <a href="#controllers">Контролери</a>
   <a href="#boards">Плати</a>
   <a href="#audio">Підсилювачі</a>
   <a href="#wip">В розробці</a>
@@ -358,44 +218,112 @@
   <!-- CONTROLLERS -->
   <div class="section-label" id="controllers">// контролери</div>
   <div class="grid">
-
     <div class="card">
-      <!-- замінити src на своє фото: images/soldering_station.jpg -->
-      <div class="card-img-placeholder">
+
+      <!-- ════════════════════════════════════════════
+           ЯК ДОДАТИ ФОТО:
+           1. Поклади фото у папку images/
+           2. Замінити <div class="card-img-placeholder"> на блок нижче:
+
+      <div class="card-gallery"
+           data-images="images/station_1.jpg,images/station_2.jpg,images/station_3.jpg"
+           onclick="lbOpen(this)">
+        <img src="images/station_1.jpg" alt="Паяльна станція">
+        <div class="gallery-badge">📷 3</div>
+      </div>
+
+           data-images  — всі фото через кому
+           src=         — перше фото (обкладинка)
+           gallery-badge — кількість фото (вручну)
+           ════════════════════════════════════════════ -->
+
+      <div class="card-gallery"
+           data-images="images/Paialo.png,images/Paialo_2.png"
+           onclick="lbOpen(this)">
+        <img src="images/Paialo.png" alt="Паяльна станція">
+        <div class="gallery-badge">📷 2</div>
+      </div>
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
           <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
         </svg>
         <span>фото / відео</span>
       </div>
-      <!-- або: <img class="card-img" src="images/soldering_station.jpg" alt="Паяльна станція"> -->
+
       <div class="card-body">
         <div class="card-title">Контролер паяльної станції</div>
         <div class="card-meta">ATmega128 · два канали · QuickPID</div>
         <div class="card-desc">
-          Двоканальний контролер для паяльника і фена. ПІД-регулювання температури,
-          термопара через CD4053B, MOC3041M + BT816 для нагрівачів, детекція нуля,
-          дисплей SH1106. Власна плата, корпус.
+          Двоканальний контролер для паяльника і фена. ПІД-регулювання температури, комутація змінного струму ключами на мосфетах та два канали MOC3041M + сімістор для фена та нижнього підігріву,
+          термопара паяльників через CD4053B,  детекція нуля,
+          дисплей 12864. Власна плата, корпус.
         </div>
         <div class="tags">
-          <span class="tag">AVR</span>
-          <span class="tag">PID</span>
-          <span class="tag">triac</span>
-          <span class="tag">KiCad</span>
+          <span class="tag">AVR</span><span class="tag">PID</span>
+          <span class="tag">triac</span><span class="tag">KiCad</span>
         </div>
         <div class="card-links">
           <!-- <a href="https://youtube.com/...">▶ відео</a> -->
-          <!-- <a href="#">📷 більше фото</a> -->
         </div>
       </div>
     </div>
-
   </div>
+
+<!-- Wi-Fi реле -->
+  <div class="section-label" id="Wi-Fi реле">// плати / embedded</div>
+  <div class="grid">
+    <div class="card">
+
+        <div class="card-gallery"
+           data-images="images/WiFi_Relay.png,images/WiFi_Relay_1.jpg,images/WiFi_Relay_2.jpg"
+           onclick="lbOpen(this)">
+        <img src="images/WiFi_Relay.png" alt="Wi-Fi реле">
+        <div class="gallery-badge">📷 3</div>
+      </div>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="3" y="3" width="18" height="18" rx="1"/>
+          <circle cx="8" cy="8" r="1.5"/><circle cx="16" cy="8" r="1.5"/>
+          <circle cx="8" cy="16" r="1.5"/><circle cx="16" cy="16" r="1.5"/>
+          <path d="M8 9.5v5M16 9.5v5M9.5 8h5M9.5 16h5"/>
+        </svg>
+        <span>фото / KiCad render</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">ESP-12f —  плата </div>
+        <div class="card-meta">ESP-12f  · KiCad</div>
+        <div class="card-desc">
+          Власна плата під ESP-12 з 4 реле своїм живленням та кнопками . є вхід для монітору струму та напруги. Плата для керування побутовими приладами з Wi-Fi.
+         
+        </div>
+        <div class="tags">
+          <span class="tag">ESP-12f</span><span class="tag">Wi-Fi</span>
+          <span  class="tag">KiCad</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
 
   <!-- BOARDS -->
   <div class="section-label" id="boards">// плати / embedded</div>
   <div class="grid">
-
     <div class="card">
+
+      <!-- приклад з двома фото:
+      <div class="card-gallery"
+           data-images="images/stm32_photo.jpg,images/stm32_render.jpg"
+           onclick="lbOpen(this)">
+        <img src="images/stm32_photo.jpg" alt="STM32 плата">
+        <div class="gallery-badge">📷 2</div>
+      </div>
+      -->
+
       <div class="card-img-placeholder">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
           <rect x="3" y="3" width="18" height="18" rx="1"/>
@@ -414,21 +342,16 @@
           EEPROM, MAX7219, USB OTG FS, універсальний роз'єм дисплея.
         </div>
         <div class="tags">
-          <span class="tag">STM32</span>
-          <span class="tag">Ethernet</span>
-          <span class="tag">LAN8720</span>
-          <span class="tag">KiCad</span>
-          <span class="tag">USB OTG</span>
+          <span class="tag">STM32</span><span class="tag">Ethernet</span>
+          <span class="tag">LAN8720</span><span class="tag">KiCad</span><span class="tag">USB OTG</span>
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- AUDIO -->
   <div class="section-label" id="audio">// підсилювачі</div>
   <div class="grid">
-
     <div class="card">
       <div class="card-img-placeholder">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
@@ -440,46 +363,31 @@
       <div class="card-body">
         <div class="card-title">Підсилювач [назва]</div>
         <div class="card-meta">[клас A/AB/D] · [потужність] Вт</div>
-        <div class="card-desc">
-          Опис проєкту — схема, корпус, результат. Замінити на свій текст.
-        </div>
-        <div class="tags">
-          <span class="tag">audio</span>
-          <span class="tag">DIY</span>
-        </div>
+        <div class="card-desc">Опис проєкту. Замінити на свій текст.</div>
+        <div class="tags"><span class="tag">audio</span><span class="tag">DIY</span></div>
       </div>
     </div>
-
   </div>
 
   <!-- WIP -->
   <div class="section-label" id="wip">// в розробці</div>
   <div class="grid">
-
     <div class="card" style="opacity:.75">
-      <div class="card-img-placeholder" style="aspect-ratio:3/1; background:#0a1a0b;">
-        <span style="font-family:'Share Tech Mono',monospace;font-size:.7rem;color:#2e7d32">
-          [ проєкт ще в процесі ]
-        </span>
+      <div class="card-img-placeholder" style="aspect-ratio:3/1;background:#0a1a0b;">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:.7rem;color:#2e7d32">[ проєкт ще в процесі ]</span>
       </div>
       <div class="card-body">
-        <div class="card-title">
-          Споттер для зварювання акумуляторів
-          <span class="badge-wip">WIP</span>
-        </div>
+        <div class="card-title">Споттер для зварювання акумуляторів<span class="badge-wip">WIP</span></div>
         <div class="card-meta">STM32 · HCPL-3120 · IGBT</div>
         <div class="card-desc">
           Імпульсний споттер на базі промислового MOSFET-силового модуля.
           STM32-керування тривалістю імпульсу, власний драйвер затвора.
         </div>
         <div class="tags">
-          <span class="tag">STM32</span>
-          <span class="tag">power</span>
-          <span class="tag">gate driver</span>
+          <span class="tag">STM32</span><span class="tag">power</span><span class="tag">gate driver</span>
         </div>
       </div>
     </div>
-
   </div>
 
 </main>
@@ -495,5 +403,39 @@
   </div>
 </footer>
 
+<script>
+  let lbImages = [], lbIndex = 0;
+
+  function lbOpen(el) {
+    lbImages = el.dataset.images.split(',').map(s => s.trim());
+    lbIndex = 0;
+    lbShow();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lbShow() {
+    document.getElementById('lightbox-img').src = lbImages[lbIndex];
+    document.getElementById('lb-counter').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    document.getElementById('lb-prev').disabled = lbIndex === 0;
+    document.getElementById('lb-next').disabled = lbIndex === lbImages.length - 1;
+  }
+  function lbStep(dir) {
+    lbIndex = Math.max(0, Math.min(lbImages.length - 1, lbIndex + dir));
+    lbShow();
+  }
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') lbClose();
+    if (e.key === 'ArrowLeft') lbStep(-1);
+    if (e.key === 'ArrowRight') lbStep(1);
+  });
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) lbClose();
+  });
+</script>
 </body>
 </html>
